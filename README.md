@@ -6,7 +6,7 @@
 - `index.html`：App 本體
 - `manifest.webmanifest`：App 名稱、圖示、全螢幕設定
 - `sw.js`：離線快取
-- `icons/`：Logo（`icon.svg` 是向量原檔）
+- `icon*.png`、`apple-touch-icon.png`、`favicon-64.png`：Logo 圖示（`icon.svg` 是向量原檔）
 
 ## 上線（免費，二選一）
 
@@ -15,7 +15,7 @@ App 必須放在 https 網址上，手機才能「安裝」。
 ### 方法 A：GitHub Pages（推薦，網址永久不變）
 1. 到 github.com 註冊並登入
 2. 右上角「+」→「New repository」，名稱填 `qiantu`，選 **Public**，按「Create repository」
-3. 在新頁面點「uploading an existing file」，把這個資料夾**裡面的所有檔案和 icons 資料夾**拖進去，按「Commit changes」
+3. 在新頁面點「uploading an existing file」，把這個資料夾**裡面的所有檔案**拖進去，按「Commit changes」
 4. 到 repository 的「Settings」→ 左側「Pages」→ Branch 選 `main`、資料夾選 `/ (root)` → Save
 5. 等 1–2 分鐘，網址會是 `https://你的帳號.github.io/qiantu/`
 

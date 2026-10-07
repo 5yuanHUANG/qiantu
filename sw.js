@@ -1,10 +1,10 @@
 // 錢途 service worker: app shell works offline; the page itself is fetched fresh when online.
-const VERSION = 'qiantu-v1';
+const VERSION = 'qiantu-v2';
 const EXT = VERSION + '-ext';
 const SHELL = [
   './', './index.html', './manifest.webmanifest',
-  './icons/icon.svg', './icons/icon-192.png', './icons/icon-512.png',
-  './icons/apple-touch-icon.png', './icons/favicon-64.png'
+  './icon.svg', './icon-192.png', './icon-512.png',
+  './apple-touch-icon.png', './favicon-64.png'
 ];
 const EXT_HOSTS = ['fonts.googleapis.com', 'fonts.gstatic.com', 'cdn.jsdelivr.net'];
 
