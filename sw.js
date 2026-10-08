@@ -1,5 +1,5 @@
 // 錢途 service worker: app shell works offline; the page itself is fetched fresh when online.
-const VERSION = 'qiantu-v6';
+const VERSION = 'qiantu-v7';
 const EXT = VERSION + '-ext';
 const SHELL = [
   './', './index.html', './manifest.webmanifest',
