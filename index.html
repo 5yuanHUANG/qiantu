@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
 <title>錢途</title>
 <meta name="description" content="個人財務副駕：現金流、信用卡、安全可支配金額與消費決策">
 <meta name="theme-color" content="#EDF1EF" media="(prefers-color-scheme: light)">
@@ -15,38 +15,36 @@
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon-64.png" sizes="64x64" type="image/png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap">
 <style>
-html{-webkit-text-size-adjust:100%}body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%}body{margin:0}html,body{overflow-x:hidden;max-width:100%}body{touch-action:manipulation}img{max-width:100%}[hidden]{display:none!important}
 /* Layout: single phone column, sticky header, fixed bottom tab bar; ledger-paper neutrals with a deep jade accent. Taiwan convention: red = 漲, green = 跌 */
 :root{
   --bg:#EDF1EF;--surface:#FFFFFF;--surface2:#F5F8F6;--ink:#13201C;--muted:#5D6B67;--line:#D7DFDC;
   --accent:#1C5A50;--accent-ink:#FFFFFF;--accent-soft:#DAEAE4;
   --up:#C3362B;--down:#1C8549;--warn:#9A6210;--warn-soft:#F6E9D2;--bad-soft:#F7DFDB;--ok-soft:#DCEFE2;
   --shadow:0 1px 2px rgba(19,32,28,.05),0 6px 18px rgba(19,32,28,.06);
-  --f-body:"Noto Sans TC",system-ui,-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif;
-  --f-num:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  --f-body:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif;
+  --f-num:-apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,sans-serif;
+  --bar:rgba(255,255,255,.72);--bar-bg:rgba(237,241,239,.78);
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#0E1412;--surface:#161F1C;--surface2:#1B2622;--ink:#E4ECE9;--muted:#91A09B;--line:#28332F;
   --accent:#72C6B3;--accent-ink:#0B1714;--accent-soft:#1D3530;
   --up:#F06A5F;--down:#52C386;--warn:#E3AA4E;--warn-soft:#3A2E18;--bad-soft:#3C1F1C;--ok-soft:#183324;
-  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 18px rgba(0,0,0,.25);color-scheme:dark}}
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 18px rgba(0,0,0,.25);--bar:rgba(22,31,28,.72);--bar-bg:rgba(14,20,18,.78);color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#0E1412;--surface:#161F1C;--surface2:#1B2622;--ink:#E4ECE9;--muted:#91A09B;--line:#28332F;
   --accent:#72C6B3;--accent-ink:#0B1714;--accent-soft:#1D3530;
   --up:#F06A5F;--down:#52C386;--warn:#E3AA4E;--warn-soft:#3A2E18;--bad-soft:#3C1F1C;--ok-soft:#183324;
-  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 18px rgba(0,0,0,.25);color-scheme:dark}
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 18px rgba(0,0,0,.25);--bar:rgba(22,31,28,.72);--bar-bg:rgba(14,20,18,.78);color-scheme:dark}
 *{box-sizing:border-box}
 html,body{height:100%}
-body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.55;-webkit-tap-highlight-color:transparent}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.5;-webkit-tap-highlight-color:transparent}
 button,input,select,textarea{font:inherit;color:inherit}
-.num{font-family:var(--f-num);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.num{font-family:var(--f-num);font-variant-numeric:tabular-nums}
 .app{max-width:560px;margin:0 auto;padding-inline:16px;padding-block:0 calc(92px + env(safe-area-inset-bottom,0px))}
-header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);display:flex;align-items:center;justify-content:space-between;padding-block:14px 10px;gap:12px}
-header.top h1{font-size:20px;margin:0;font-weight:700;letter-spacing:.02em}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);background:var(--bar-bg);-webkit-backdrop-filter:blur(20px) saturate(180%);backdrop-filter:blur(20px) saturate(180%);margin-inline:-16px;padding-inline:16px;display:flex;align-items:center;justify-content:space-between;padding-block:14px 10px;gap:12px}
+header.top h1{font-size:22px;margin:0;font-weight:700;letter-spacing:-.01em;line-height:1.2}
 header.top .sub{font-size:12px;color:var(--muted)}
 .brand{display:flex;align-items:center;gap:10px}.brand img{border-radius:9px;flex:none}
 .icon-btn{width:40px;height:40px;border-radius:12px;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center;cursor:pointer}
@@ -56,8 +54,8 @@ header.top .sub{font-size:12px;color:var(--muted)}
 .card h2{font-size:15px;margin:0 0 10px;font-weight:700;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
 .card h2 small{font-weight:400;color:var(--muted);font-size:12px}
 .label{font-size:12px;color:var(--muted);letter-spacing:.04em}
-.big{font-size:32px;font-weight:600;line-height:1.15}
-.mid{font-size:20px;font-weight:600}
+.big{font-size:34px;font-weight:700;line-height:1.08;letter-spacing:-.02em}
+.mid{font-size:20px;font-weight:600;letter-spacing:-.01em}
 .muted{color:var(--muted)}
 .row{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
@@ -78,6 +76,7 @@ header.top .sub{font-size:12px;color:var(--muted)}
 .item .t{font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .item .s{font-size:12px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .item .s.wrap{white-space:normal}
+.item .t.wrap{white-space:normal;display:flex;flex-wrap:wrap;gap:4px;align-items:center}
 .item .amt{font-weight:600;text-align:right;white-space:nowrap}
 .tag{display:inline-flex;align-items:center;font-size:11px;padding:1px 7px;border-radius:99px;background:var(--surface2);color:var(--muted);white-space:nowrap;border:1px solid var(--line)}
 .tag.est{border-style:dashed}
@@ -97,7 +96,7 @@ header.top .sub{font-size:12px;color:var(--muted)}
 .btn.ghost{background:var(--surface2);color:var(--ink)}
 .btn.line{background:transparent;border:1px solid var(--line);color:var(--ink)}
 .btn.danger{background:var(--bad-soft);color:var(--up)}
-.btn.sm{min-height:34px;padding:6px 12px;font-size:13px;border-radius:10px}
+.btn.sm{min-height:40px;padding:6px 14px;font-size:14px;border-radius:11px}
 .btn.block{width:100%}
 .btn:disabled{opacity:.5;cursor:default}
 .btns{display:flex;gap:8px;flex-wrap:wrap}
@@ -120,11 +119,18 @@ form{display:flex;flex-direction:column;gap:12px}
 input[type=text],input[type=number],input[type=date],input[type=month],input[type=password],select,textarea{width:100%;border:1px solid var(--line);background:var(--surface2);border-radius:11px;padding:10px 12px;min-height:44px;outline:none}
 input:focus,select:focus,textarea:focus{border-color:var(--accent)}
 textarea{min-height:70px;resize:vertical}
+/* iPhone: inputs under 16px trigger auto-zoom; date inputs carry an intrinsic min width */
+input,select,textarea{font-size:16px;max-width:100%;min-width:0}
+input[type=date],input[type=month]{-webkit-appearance:none;appearance:none;display:block;width:100%;min-width:0;line-height:1.3}
+input[type=date]::-webkit-date-and-time-value,input[type=month]::-webkit-date-and-time-value{text-align:left}
+.grid2>*,.grid3>*,.row>*{min-width:0}
+.kv span{min-width:0;overflow-wrap:anywhere}
+.qbar input{min-width:0}
 .chk{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
 .chk input{width:20px;height:20px;flex:none;margin-top:2px}
 .amount-in{font-family:var(--f-num);font-size:28px;font-weight:600;text-align:right}
 .hint{font-size:12px;color:var(--muted)}
-nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--surface);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
+nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--surface);background:var(--bar);-webkit-backdrop-filter:blur(20px) saturate(180%);backdrop-filter:blur(20px) saturate(180%);border-top:.5px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
 nav.tabs .in{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr)}
 nav.tabs button{position:relative;border:0;background:transparent;padding:8px 0 9px;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;color:var(--muted);cursor:pointer}
 nav.tabs button svg{width:22px;height:22px}
@@ -132,20 +138,31 @@ nav.tabs button.on{color:var(--accent);font-weight:600}
 .badge{position:absolute;top:4px;left:calc(50% + 6px);min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--up);color:#fff;font-size:11px;font-weight:700;display:grid;place-items:center}
 .fab{position:fixed;right:max(16px,calc(50% - 264px));bottom:calc(76px + env(safe-area-inset-bottom,0px));z-index:31;width:56px;height:56px;border-radius:18px;border:0;background:var(--accent);color:var(--accent-ink);box-shadow:0 8px 24px rgba(19,32,28,.25);display:grid;place-items:center;cursor:pointer}
 .fab svg{width:26px;height:26px}
+/* Press feedback on touch-down */
+.btn,.icon-btn,.fab,.quickbar,.item[data-act],.seg button,nav.tabs button,.sugg{transition:transform 120ms ease-out,background-color 120ms ease-out,opacity 120ms ease-out}
+.btn:active,.icon-btn:active,.quickbar:active{transform:scale(.97)}
+.fab:active{transform:scale(.92)}
+.btn:active{opacity:.88}
+.item[data-act]{margin-inline:-8px;padding-inline:8px;border-radius:12px}
+.item[data-act]:active,details.why summary:active{background:var(--surface2)}
+nav.tabs button:active,.seg button:active{opacity:.55}
 .sheet{position:fixed;inset:0;z-index:50;display:flex;flex-direction:column;justify-content:flex-end}
-.sheet-back{position:absolute;inset:0;background:rgba(8,14,12,.45)}
-.sheet-panel{position:relative;background:var(--surface);border-radius:22px 22px 0 0;max-height:92%;overflow:auto;width:100%;max-width:560px;margin:0 auto;padding:8px 16px calc(20px + env(safe-area-inset-bottom,0px));animation:up .22s ease-out}
-.sheet-panel .grab{width:40px;height:5px;border-radius:9px;background:var(--line);margin:4px auto 12px}
+.sheet-back{position:absolute;inset:0;background:rgba(8,14,12,.45);opacity:0}
+.sheet-panel{position:relative;background:var(--surface);border-radius:22px 22px 0 0;max-height:92%;overflow:auto;overscroll-behavior:contain;width:100%;max-width:560px;margin:0 auto;padding:8px 16px calc(20px + env(safe-area-inset-bottom,0px));transform:translate3d(0,100%,0);will-change:transform;box-shadow:0 -8px 30px rgba(0,0,0,.12)}
+.sheet-panel .grab{width:40px;height:5px;border-radius:9px;background:var(--line);margin:4px auto 12px;touch-action:none}
 .sheet-panel h3{margin:0 0 12px;font-size:18px}
-@keyframes up{from{transform:translateY(30px);opacity:.6}to{transform:none;opacity:1}}
-@media (prefers-reduced-motion: reduce){.sheet-panel{animation:none}}
+@keyframes toastIn{from{transform:translate(-50%,12px);opacity:0}to{transform:translate(-50%,0);opacity:1}}
+#toast:not([hidden]){animation:toastIn 220ms cubic-bezier(.2,.8,.2,1)}
+@media (prefers-reduced-motion: reduce){#toast:not([hidden]){animation:none}.btn:active,.icon-btn:active,.quickbar:active,.fab:active{transform:none}}
+@media (prefers-reduced-transparency: reduce){header.top{background:var(--bg);-webkit-backdrop-filter:none;backdrop-filter:none}nav.tabs{background:var(--surface);-webkit-backdrop-filter:none;backdrop-filter:none}}
+@media (prefers-contrast: more){:root{--line:#8A9894}.card,.sugg,.stat{border:1px solid var(--line)}nav.tabs{background:var(--surface);-webkit-backdrop-filter:none;backdrop-filter:none}}
 #toast{display:flex;gap:14px;align-items:center;position:fixed;left:50%;transform:translateX(-50%);bottom:calc(150px + env(safe-area-inset-bottom,0px));z-index:60;background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;font-size:14px;max-width:calc(100% - 32px)}
 .toast-undo{background:none;border:0;color:inherit;font-weight:700;text-decoration:underline;cursor:pointer;padding:4px}
 .quickbar{display:flex;align-items:center;gap:10px;width:100%;border:1px solid var(--line);background:var(--surface);border-radius:16px;padding:12px 14px;cursor:pointer;text-align:left;box-shadow:var(--shadow)}
 .quickbar span{flex:1;color:var(--muted)}
 .quickbar b{width:30px;height:30px;border-radius:10px;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-size:20px;line-height:1}
 .qbar{display:flex;gap:8px}.qbar input{flex:1;font-size:17px}
-.qsel{width:auto!important;min-height:32px!important;padding:3px 6px!important;font-size:13px;border-radius:8px!important}
+.qsel{width:auto!important;max-width:100%;min-height:34px!important;padding:3px 6px!important;font-size:16px;border-radius:8px!important}
 .chart{width:100%;height:auto;display:block}
 .chart text{fill:var(--muted);font-size:10px;font-family:var(--f-num)}
 .c-line{fill:none;stroke:var(--accent);stroke-width:2}
@@ -301,10 +318,10 @@ function acctDelta(t,id){const A=+t.amount||0;switch(t.kind){
   case'expense':case'invest_buy':case'card_payment':return t.acct===id?-A:0;
   case'income':case'invest_sell':case'refund':return t.acct===id?A:0;
   case'transfer':return(t.acct===id?-A:0)+(t.to===id?(t.toAmount!=null&&t.toAmount!==''?+t.toAmount:A):0)}return 0}
-function inBaseline(t,a){return!afterBase(t,a.balanceDate,a.balanceAt)}
-function acctBal(a){let b=+a.balance||0;for(const t of DB.txs){if(!counted(t))continue;const d=acctDelta(t,a.id);if(d&&afterBase(t,a.balanceDate,a.balanceAt))b+=d}return r2(b)}
+function inBaseline(t,a){return!!t.baseIncluded||!afterBase(t,a.balanceDate,a.balanceAt)}
+function acctBal(a){let b=+a.balance||0;for(const t of DB.txs){if(!counted(t)||t.baseIncluded)continue;const d=acctDelta(t,a.id);if(d&&afterBase(t,a.balanceDate,a.balanceAt))b+=d}return r2(b)}
 function cardState(c){const sb=c.stmt;const pBase=sb?sb.closeDate:c.unbilledAsOf,pAt=sb?sb.at:c.unbilledAt;let unb=+c.unbilledBase||0,pays=0;
-  for(const t of DB.txs){if(!counted(t))continue;
+  for(const t of DB.txs){if(!counted(t)||t.baseIncluded)continue;
     if((t.kind==='expense'||t.kind==='refund')&&t.acct===c.id&&afterBase(t,c.unbilledAsOf,c.unbilledAt))unb+=t.kind==='expense'?+t.amount:-t.amount;
     if(t.kind==='card_payment'&&t.to===c.id&&afterBase(t,pBase,pAt))pays+=+t.amount}
   let rem=sb?(+sb.amount)-(+sb.paidBase||0)-pays:0;if(!sb)unb-=pays;if(rem<0){unb+=rem;rem=0}
@@ -312,7 +329,7 @@ function cardState(c){const sb=c.stmt;const pBase=sb?sb.closeDate:c.unbilledAsOf
 function closeDayOf(c){if(c.closeDay)return{d:+c.closeDay,assumed:false};if(c.dueDay){let d=+c.dueDay-15;if(d<1)d+=30;return{d,assumed:true}}return null}
 function closesBetween(c,a,b){const cd=closeDayOf(c);if(!cd)return[];const out=[];let x=a;for(let i=0;i<24;i++){const n=nextMonthDay(x,cd.d,true);if(!n||n>b)break;out.push(n);x=n}return out}
 const dueAfter=(c,close)=>c.dueDay?nextMonthDay(close,+c.dueDay,true):addDays(close,15);
-function stmtEstimate(c,D){let e=+c.unbilledBase||0;for(const t of DB.txs){if(!counted(t)||t.acct!==c.id)continue;if((t.kind==='expense'||t.kind==='refund')&&afterBase(t,c.unbilledAsOf,c.unbilledAt)&&t.date<=D)e+=t.kind==='expense'?+t.amount:-t.amount}return r2(e)}
+function stmtEstimate(c,D){let e=+c.unbilledBase||0;for(const t of DB.txs){if(!counted(t)||t.baseIncluded||t.acct!==c.id)continue;if((t.kind==='expense'||t.kind==='refund')&&afterBase(t,c.unbilledAsOf,c.unbilledAt)&&t.date<=D)e+=t.kind==='expense'?+t.amount:-t.amount}return r2(e)}
 function pendingStmts(){const t=todayStr(),out=[];for(const c of liveCards()){if(!c.closeDay)continue;const last=c.stmt?c.stmt.closeDate:c.unbilledAsOf;const cl=closesBetween(c,last,t);if(cl.length){const D=cl[cl.length-1];out.push({c,close:D,due:dueAfter(c,D),est:stmtEstimate(c,D)})}}return out}
 function applyStmt(c,close,amount,paidBase){c.stmt={amount:r2(amount),closeDate:close,dueDate:dueAfter(c,close),paidBase:r2(paidBase||0),at:Date.now()};c.unbilledBase=0;c.unbilledAsOf=close;c.unbilledAt=Number.MAX_SAFE_INTEGER}
 
@@ -322,9 +339,10 @@ const recEnd=r=>r.end?(r.end.length===7?monthEnd(r.end):r.end):'9999-12-31';
 function recDates(r,from,to){const out=[];if(r.paused)return out;const s=[r.start||'',DB.settings.startDate||''].sort().pop();const a=from>s?from:s;const e=recEnd(r);const b=to<e?to:e;if(!a||a>b)return out;
   if(r.freq==='weekly'){let d=a;for(let i=0;i<7&&parseD(d).getDay()!==+r.weekday;i++)d=addDays(d,1);for(;d<=b;d=addDays(d,7))out.push(d);return out}
   const[y,m]=a.split('-').map(Number);for(let i=0;i<480;i++){const c=dayIn(y,m+i,+r.day||1);if(c>b)break;if(c>=a&&(r.freq!=='yearly'||+c.slice(5,7)===+r.month))out.push(c)}return out}
+function upcomingThisMonth(){const t=todayStr(),out=[];const end=[monthEnd(t.slice(0,7)),addDays(t,14)].sort().pop();for(const r of DB.recurring)if(r.kind==='expense')for(const d of recDates(r,addDays(t,1),end))if(!DB.occ[okey(r,d)])out.push({r,d});return out.sort((a,b)=>a.d.localeCompare(b.d))}
 function pendingRec(){const t=todayStr(),out=[];for(const r of DB.recurring)for(const d of recDates(r,DB.settings.startDate||t,t))if(!DB.occ[okey(r,d)])out.push({r,d});return out.sort((a,b)=>a.d.localeCompare(b.d))}
 function defIncomeAcct(){const a=liveAccts();return(a.find(x=>x.kind==='bank'&&x.cur==='TWD')||a[0]||{}).id}
-function confirmOcc(r,d,amount,date,pay){const p=pay||r.payWith||defIncomeAcct();const tx={id:uid(),kind:r.kind==='income'?'income':'expense',amount:r2(amount),cur:card(p)?'TWD':curOf(p),date:date||d,acct:p,to:'',merchant:r.name,cat:r.cat,tags:[...(r.tags||[])],source:'recurring',confirm:'confirmed',occur:'occurred',rec:{id:r.id,d},note:'',ts:Date.now()};DB.txs.push(tx);DB.occ[okey(r,d)]={s:'done',tx:tx.id};return tx}
+function confirmOcc(r,d,amount,date,pay,base){const p=pay||r.payWith||defIncomeAcct();const tx={id:uid(),kind:r.kind==='income'?'income':'expense',amount:r2(amount),cur:card(p)?'TWD':curOf(p),date:date||d,acct:p,to:'',merchant:r.name,cat:r.cat,tags:[...(r.tags||[])],source:'recurring',confirm:'confirmed',occur:'occurred',rec:{id:r.id,d},note:'',baseIncluded:!!base,ts:Date.now()};DB.txs.push(tx);DB.occ[okey(r,d)]={s:'done',tx:tx.id};return tx}
 function removeTx(id){const i=DB.txs.findIndex(t=>t.id===id);if(i<0)return;const t=DB.txs[i];DB.txs.splice(i,1);if(t.rec){const k=t.rec.id+'|'+t.rec.d;if(DB.occ[k]&&DB.occ[k].tx===id)delete DB.occ[k]}}
 function nextPayday(){const t=todayStr();let best=null;for(const r of DB.recurring){if(r.kind!=='income'||!r.isSalary)continue;for(const d of recDates(r,addDays(t,1),addDays(t,75)))if(!DB.occ[okey(r,d)]){if(!best||d<best.date)best={date:d,r};break}}return best}
 function horizonEnd(h){const t=todayStr();h=h||DB.settings.horizon;if(h==='payday'){const p=nextPayday();return p?p.date:addDays(t,30)}return addDays(t,+h||30)}
@@ -440,7 +458,7 @@ function lineChart(pts,startDate,label){const W=340,H=140,pl=6,pr=6,pt=16,pb=20,
 /* ================= views ================= */
 const S={tab:'home',txTab:'pending',acTab:'acct',adTab:'sugg',month:'',flowH:null,flowInc:false,df:{item:'',price:'',date:'',pay:'',inst:false,n:12,fee:'',feeKnown:false,need:'want',why:''},dres:null,dai:'',daiBusy:false,chat:[],chatBusy:false,checkup:'',checkBusy:false,ai:null,openSug:{}};
 function srcOpts(val,{cards=true,accts=true,blank=false}={}){let h=blank?'<option value="">（未指定）</option>':'';if(accts)h+=`<optgroup label="帳戶">${liveAccts().map(a=>`<option value="${a.id}" ${a.id===val?'selected':''}>${esc(a.name)}${a.cur!=='TWD'?'（'+a.cur+'）':''}</option>`).join('')}</optgroup>`;if(cards&&liveCards().length)h+=`<optgroup label="信用卡">${liveCards().map(c=>`<option value="${c.id}" ${c.id===val?'selected':''}>${esc(c.name)}</option>`).join('')}</optgroup>`;return h}
-function evRow(e,showAfter=true){const a=acc(e.acct);return`<div class="item"><div class="main"><div class="t">${esc(e.label)} ${e.est?'<span class="tag est">預估</span>':''} ${e.overdue?'<span class="tag bad">已過期</span>':''} ${e.assumed?'<span class="tag mid">結帳日估算</span>':''}</div><div class="s">${md(e.date)} 週${wk(e.date)}・${esc(a?a.name:'未指定帳戶')}${showAfter&&e.after!=null?`・之後 ${fmt(e.after,a&&a.cur)}`:''}</div></div><div class="amt num ${e.delta>0?'pos':''}">${e.delta>0?'+':''}${fmt(e.delta,a&&a.cur)}</div></div>`}
+function evRow(e,showAfter=true){const a=acc(e.acct);return`<div class="item" ${e.rec&&e.est?`data-act="occ" data-key="${esc(e.rec+'|'+e.orig)}"`:''}><div class="main"><div class="t wrap">${esc(e.label)} ${e.est?'<span class="tag est">預估</span>':''} ${e.overdue?'<span class="tag bad">已過期</span>':''} ${e.assumed?'<span class="tag mid">結帳日估算</span>':''}</div><div class="s">${md(e.date)} 週${wk(e.date)}・${esc(a?a.name:'未指定帳戶')}${showAfter&&e.after!=null?`・之後 ${fmt(e.after,a&&a.cur)}`:''}</div></div><div class="amt num ${e.delta>0?'pos':''}">${e.delta>0?'+':''}${fmt(e.delta,a&&a.cur)}</div></div>`}
 function sugCard(s,i){const open=S.openSug[s.key];return`<div class="sugg"><div class="h"><b>${esc(s.title)}</b><span class="tag ${s.prio==='必須處理'?'bad':s.prio==='值得處理'?'mid':''}">${s.prio}</span></div>
   <div class="hint">${esc(s.impact)}</div>
   <details class="why" ${open?'open':''} data-key="${s.key}"><summary>依據與假設</summary>${s.basis.map(b=>`<div class="kv"><span>依據</span><span>${esc(b)}</span></div>`).join('')}${s.assume.map(b=>`<div class="kv"><span>假設</span><span>${esc(b)}</span></div>`).join('')}<div class="kv"><span>時效</span><span>${esc(s.valid)}</span></div></details>
@@ -485,7 +503,8 @@ function vTxs(){
   if(S.txTab==='pending'){body=`<section class="card"><h2>待確認 <small>${n} 項</small></h2>${n?'':'<div class="empty">都確認完了。</div>'}
     ${ps.map(p=>`<div class="item" data-act="stmt" data-id="${p.c.id}"><span class="tag mid">帳單</span><div class="main"><div class="t">${esc(p.c.name)} ${md(p.close)} 結帳</div><div class="s">依紀錄估計 ${fmt(p.est)}・${md(p.due)} 繳款</div></div><div class="amt">確認 ›</div></div>`).join('')}
     ${pr.map(p=>`<div class="item"><span class="tag est">${md(p.d)}</span><div class="main" data-act="occ" data-key="${okey(p.r,p.d)}" style="cursor:pointer"><div class="t">${esc(p.r.name)} ${p.r.amountType==='variable'?'<span class="tag">金額會變</span>':''}</div><div class="s">${esc(srcName(p.r.payWith||defIncomeAcct()))}・預估 ${fmt(p.r.amount)}</div></div><div class="btns" style="flex:none"><button class="btn sm" data-act="occOk" data-key="${okey(p.r,p.d)}" aria-label="依預估確認">✓</button><button class="btn sm ghost" data-act="occSkip" data-key="${okey(p.r,p.d)}">沒發生</button></div></div>`).join('')}
-    ${pr.length>1?`<button class="btn ghost block" style="margin-top:10px" data-act="occAll">全部依預估金額確認（${pr.length} 筆）</button>`:''}</section>`}
+    ${pr.length>1?`<button class="btn ghost block" style="margin-top:10px" data-act="occAll">全部依預估金額確認（${pr.length} 筆）</button>`:''}</section>
+    <section class="card"><h2>還沒到期、但已經先付了？</h2><div class="hint">例如房貸已經先扣款。標記後不會再從餘額重複扣，但仍會算進本月支出。</div><button class="btn ghost block" style="margin-top:10px" data-act="prepaid">標記已先付的固定支出（${upcomingThisMonth().length} 筆可選）</button></section>`}
   else{const m=S.month||todayStr().slice(0,7);const all=DB.txs.filter(t=>t.date.slice(0,7)===m).sort((a,b)=>b.date.localeCompare(a.date)||b.ts-a.ts);
     const sp=all.filter(t=>counted(t)&&t.kind==='expense'),rf=all.filter(t=>counted(t)&&t.kind==='refund'),inc=all.filter(t=>counted(t)&&t.kind==='income');
     const outS=r2(sum(sp,t=>toTWD(t.amount,t.cur))-sum(rf,t=>toTWD(t.amount,t.cur))),inS=sum(inc,t=>toTWD(t.amount,t.cur));
@@ -502,7 +521,7 @@ function vTxs(){
   return`<button class="quickbar" data-act="quick"><span>一句話記帳：午餐 120、咖啡 85 刷卡</span><b>+</b></button>
   <div class="seg"><button class="${S.txTab==='pending'?'on':''}" data-act="txTab" data-k="pending">待確認${n?` (${n})`:''}</button><button class="${S.txTab==='list'?'on':''}" data-act="txTab" data-k="list">交易紀錄</button></div>${body}`}
 function txRow(t){const neg=['expense','invest_buy'].includes(t.kind),pos=['income','refund','invest_sell'].includes(t.kind);const a=acc(t.acct);
-  const notCounted=a&&inBaseline(t,a)&&t.source!=='v1';const label=t.kind==='transfer'?`${srcName(t.acct)} → ${srcName(t.to)}`:t.kind==='card_payment'?`繳 ${srcName(t.to)}`:(t.merchant||t.cat);
+  const notCounted=(t.baseIncluded||(a&&inBaseline(t,a)))&&t.source!=='v1';const label=t.kind==='transfer'?`${srcName(t.acct)} → ${srcName(t.to)}`:t.kind==='card_payment'?`繳 ${srcName(t.to)}`:(t.merchant||t.cat);
   return`<div class="item" data-act="editTx" data-id="${t.id}"><span class="tag">${t.kind==='expense'?esc(t.cat):KIND[t.kind]}</span><div class="main"><div class="t">${esc(label)}</div><div class="s">${t.kind==='transfer'||t.kind==='card_payment'?esc(srcName(t.acct)):esc(srcName(t.acct))}${(t.tags||[]).length?'・#'+t.tags.map(esc).join(' #'):''}${t.source==='recurring'?'・固定':''}${notCounted?'・已含在餘額快照':''}</div></div><div class="amt num ${pos?'pos':''}">${pos?'+':neg?'−':''}${fmt(t.amount,t.cur).replace('−','')}</div></div>`}
 function vFlow(){
   const h=S.flowH||DB.settings.horizon;const end=horizonEnd(h);const S1=safeSpend(end);const P=S.flowInc?S1.pf:S1.pc;const iss=dataIssues();
@@ -528,7 +547,7 @@ function vAccts(){
       <div class="btns" style="margin-top:8px"><button class="btn sm" data-act="payCard" data-id="${c.id}">記錄繳款</button><button class="btn sm ghost" data-act="stmt" data-id="${c.id}">輸入帳單</button><button class="btn sm ghost" data-act="cardRecon" data-id="${c.id}">更新未出帳</button></div></section>`}).join('')+'<button class="btn block" data-act="newCard">新增信用卡</button>'}
   else if(S.acTab==='rec'){const row=r=>`<div class="item" data-act="editRec" data-id="${r.id}"><span class="tag">${r.freq==='yearly'?`每年 ${r.month}/${r.day}`:r.freq==='weekly'?'每週'+'日一二三四五六'[+r.weekday]:`每月 ${r.day} 日`}</span><div class="main"><div class="t">${esc(r.name)} ${r.paused?'<span class="tag">暫停</span>':''}${recEnd(r)<todayStr()?'<span class="tag">已到期</span>':''}</div><div class="s">${esc(srcName(r.payWith))}・${esc(r.cat)}${r.end?'・至 '+r.end:''}${r.amountType==='variable'?'・金額會變':''}</div></div><div class="amt num ${r.kind==='income'?'pos':''}">${fmt(r.amount)}</div></div>`;
     const ins=DB.recurring.filter(r=>r.kind==='income'),outs=DB.recurring.filter(r=>r.kind!=='income');
-    body=`<section class="card"><h2>收入</h2><div class="list">${ins.map(row).join('')||'<div class="empty">加入薪資</div>'}</div></section><section class="card"><h2>固定支出 <small>每月約 ${fmt(monthlyFixed())}</small></h2><div class="list">${outs.map(row).join('')||'<div class="empty">房租、訂閱、保費…</div>'}</div></section><button class="btn block" data-act="newRec">新增固定收支</button>`}
+    body=`<section class="card"><h2>收入</h2><div class="list">${ins.map(row).join('')||'<div class="empty">加入薪資</div>'}</div></section><button class="btn ghost block" data-act="prepaid">這個月已經先付的，點這裡打勾</button><section class="card"><h2>固定支出 <small>每月約 ${fmt(monthlyFixed())}</small></h2><div class="list">${outs.map(row).join('')||'<div class="empty">房租、訂閱、保費…</div>'}</div></section><button class="btn block" data-act="newRec">新增固定收支</button>`}
   else{const w=worth();const pl=r2(w.inv-w.invCost);body=`<section class="card"><h2>投資 <small>${DB.holdDate?md(DB.holdDate)+' 快照・非即時':'尚未建立快照'}</small></h2><div class="mid num">${fmt(w.inv)}</div>${w.invCost?`<div class="num ${pl>=0?'up':'down'}">${pl>=0?'▲':'▼'} ${fmt(Math.abs(pl))}（依你輸入的成本）</div>`:''}<div class="hint">投資市值不算進可支配金額。台股慣例紅漲綠跌。</div>
     <div class="list" style="margin-top:8px">${DB.holdings.map(h=>{const v=h.shares*h.price*rate(h.cur),c=h.shares*h.cost*rate(h.cur);return`<div class="item" data-act="editHold" data-id="${h.id}"><div class="main"><div class="t">${esc(h.symbol)} ${esc(h.name)}</div><div class="s num">${h.shares} 股・成本 ${h.cost||'—'}・價 ${h.price}</div></div><div class="amt"><div class="num">${fmtS(v)}</div>${h.cost?`<div class="num ${v>=c?'up':'down'}" style="font-size:12px">${((v/c-1)*100).toFixed(1)}%</div>`:''}</div></div>`}).join('')}</div>
     <div class="btns" style="margin-top:8px"><button class="btn sm" data-act="newHold">新增持股</button>${DB.holdings.length?'<button class="btn sm ghost" data-act="prices">更新股價快照</button>':''}</div></section>
@@ -610,8 +629,30 @@ async function askChat(q){if(!aiOn()||S.chatBusy)return;S.chat.push({role:'user'
   try{const r=await S.ai(turns,{signal:aiCtl.signal,onText:({text})=>{last.content=text;const b=bub();if(b)b.innerHTML=md2(text)}});last.content=r.text}catch(e){last.content=(e.text||'')+(e.code==='cancelled'?'':'\n\n'+aiErr(e))}finally{if(!last.content.trim())S.chat.splice(-2,2);S.chatBusy=false;aiCtl=null;render()}}
 
 /* ================= sheets & forms ================= */
-function openSheet(html){$('#sheetBody').innerHTML=html;$('#sheet').hidden=false}
-function closeSheet(){$('#sheet').hidden=true;$('#sheetBody').innerHTML=''}
+/* Bottom sheet: spring physics (response/damping), drag-to-dismiss, interruptible, same path in and out */
+const SH={y:0,v:0,h:0,state:'closed',raf:0,onRest:null};
+const reducedMotion=()=>matchMedia('(prefers-reduced-motion: reduce)').matches;
+function sheetApply(){const p=$('.sheet-panel'),b=$('.sheet-back');p.style.transform=`translate3d(0,${SH.y.toFixed(2)}px,0)`;b.style.opacity=SH.h?Math.max(0,Math.min(1,1-SH.y/SH.h)):1}
+function springTo(target,{response=.32,damping=1,velocity,stopPast=false}={},onRest){cancelAnimationFrame(SH.raf);if(velocity!=null)SH.v=velocity;SH.onRest=onRest||null;
+  if(reducedMotion()||document.hidden){SH.y=target;SH.v=0;sheetApply();const f=SH.onRest;SH.onRest=null;f&&f();return}
+  const k=Math.pow(2*Math.PI/response,2),c=4*Math.PI*damping/response;let last=performance.now();
+  const step=now=>{const dt=Math.min(.05,(now-last)/1000);last=now;const n=Math.max(1,Math.ceil(dt/.004)),h=dt/n;for(let i=0;i<n;i++){const a=-k*(SH.y-target)-c*SH.v;SH.v+=a*h;SH.y+=SH.v*h}
+    if((stopPast&&SH.y>=target)||(Math.abs(SH.y-target)<.5&&Math.abs(SH.v)<8)){SH.y=target;SH.v=0;sheetApply();const f=SH.onRest;SH.onRest=null;f&&f();return}sheetApply();SH.raf=requestAnimationFrame(step)};SH.raf=requestAnimationFrame(step)}
+function openSheet(html){const s=$('#sheet'),p=$('.sheet-panel');const was=s.hidden;$('#sheetBody').innerHTML=html;s.hidden=false;p.scrollTop=0;SH.state='open';SH.h=p.offsetHeight;if(was){SH.y=SH.h;SH.v=0;sheetApply()}springTo(0,{response:.35,damping:1})}
+function finishClose(){if(SH.state!=='closing')return;$('#sheet').hidden=true;$('#sheetBody').innerHTML='';SH.state='closed'}
+function closeSheet(velocity){if($('#sheet').hidden||SH.state==='closing')return;SH.state='closing';SH.h=$('.sheet-panel').offsetHeight;springTo(SH.h,{response:.3,damping:1,velocity:typeof velocity==='number'?velocity:undefined,stopPast:true},finishClose)}
+const rubberband=(x,d,c=.55)=>(x*d*c)/(d+c*Math.abs(x));
+const projectDist=(v,d=.998)=>(v/1000)*d/(1-d);
+function wireSheetDrag(){const p=$('.sheet-panel');let g=null;
+  const down=(y,t)=>{if(SH.state!=='open')return;const moving=Math.abs(SH.v)>20;g={y0:y,sy:SH.y,hist:[{y,t}],drag:false};if(moving){cancelAnimationFrame(SH.raf);g.drag=true;g.sy=SH.y}};
+  const move=(y,t,e)=>{if(!g)return;const dy=y-g.y0;if(!g.drag){if(Math.abs(dy)<10)return;if(dy>0&&p.scrollTop<=0){g.drag=true;g.y0=y;g.sy=SH.y;cancelAnimationFrame(SH.raf);SH.h=p.offsetHeight}else{g=null;return}}
+    if(e&&e.cancelable)e.preventDefault();let ny=g.sy+(y-g.y0);if(ny<0)ny=-rubberband(-ny,SH.h);SH.y=ny;sheetApply();g.hist.push({y,t});while(g.hist.length>2&&t-g.hist[0].t>100)g.hist.shift()};
+  const up=()=>{if(!g)return;const G=g;g=null;if(!G.drag)return;const a=G.hist[0],b=G.hist[G.hist.length-1];const dt=b.t-a.t;const v=dt>=16?Math.max(-4000,Math.min(4000,(b.y-a.y)/dt*1000)):0;
+    const dismiss=v>500||(v>-300&&SH.y+projectDist(v)>SH.h*.45);if(dismiss)closeSheet(v);else springTo(0,{response:.3,damping:.8,velocity:v})};
+  p.addEventListener('touchstart',e=>down(e.touches[0].clientY,e.timeStamp),{passive:true});
+  p.addEventListener('touchmove',e=>move(e.touches[0].clientY,e.timeStamp,e),{passive:false});
+  p.addEventListener('touchend',up);p.addEventListener('touchcancel',up);
+  p.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse'&&e.target.closest('.grab')){down(e.clientY,e.timeStamp);const mv=ev=>move(ev.clientY,ev.timeStamp,ev),u=()=>{removeEventListener('pointermove',mv);removeEventListener('pointerup',u);up()};addEventListener('pointermove',mv);addEventListener('pointerup',u)}})}
 const fText=(l,n,v,ph='',x='')=>`<label class="f"><span>${l}</span><input type="text" name="${n}" id="f-${n}" value="${esc(v??'')}" placeholder="${esc(ph)}" ${x}></label>`;
 const fMoney=(l,n,v,ph='0')=>`<label class="f"><span>${l}</span><input type="text" inputmode="decimal" name="${n}" id="f-${n}" value="${v==null?'':esc(v)}" placeholder="${esc(ph)}"></label>`;
 const fDate=(l,n,v,type='date')=>`<label class="f"><span>${l}</span><input type="${type}" name="${n}" id="f-${n}" value="${esc(v||'')}"></label>`;
@@ -668,8 +709,13 @@ function recForm(r={kind:'expense',freq:'monthly',day:1,month:1,weekday:1,amount
 function occSheet(key){const[rid,d]=key.split('|');const r=DB.recurring.find(x=>x.id===rid);if(!r)return;openSheet(`<h3>${esc(r.name)}・${md(d)}</h3><form data-form="occ"><input type="hidden" name="key" value="${esc(key)}">
   <input type="text" inputmode="decimal" name="amount" id="f-amount" class="amount-in" value="${r.amount}" aria-label="實際金額">
   <div class="hint">預估 ${fmt(r.amount)}。${r.amountType==='variable'?'請填實際金額。':''}</div>
-  <div class="grid2">${fDate('實際日期','date',d)}<label class="f"><span>${r.kind==='income'?'入帳帳戶':'付款方式'}</span><select name="pay" id="f-pay">${srcOpts(r.payWith||defIncomeAcct(),{cards:r.kind!=='income'})}</select></label></div>
+  <div class="grid2">${fDate('實際日期','date',d>todayStr()?todayStr():d)}<label class="f"><span>${r.kind==='income'?'入帳帳戶':'付款方式'}</span><select name="pay" id="f-pay">${srcOpts(r.payWith||defIncomeAcct(),{cards:r.kind!=='income'})}</select></label></div>
+  ${fChk(r.kind==='income'?'目前餘額已經包含這筆收入':'目前餘額（或卡片未出帳）已經扣掉這筆',"base",d>todayStr(),'勾選後只記錄、不會再改變餘額。剛更新過餘額時通常要勾。')}
   <div class="btns"><button type="button" class="btn ghost" data-act="occSkip" data-key="${esc(key)}">沒發生／取消</button><button class="btn">確認</button></div></form>`)}
+function prepaidSheet(){const L=upcomingThisMonth();if(!L.length)return openSheet('<h3>標記已先付</h3><div class="empty">接下來兩週內沒有還沒確認的固定支出。</div>');
+  openSheet(`<h3>哪些已經先付了？</h3><p class="hint" style="margin-top:-6px">勾選已經付過、而且目前餘額（或信用卡未出帳）已經扣掉的項目。它們會算進本月支出，但不會再從餘額扣一次。</p>
+  <form data-form="prepaid"><div class="list">${L.map(p=>`<label class="item chk" style="cursor:pointer"><input type="checkbox" name="k" value="${esc(okey(p.r,p.d))}"><span class="main"><span class="t" style="display:block">${esc(p.r.name)}</span><span class="s" style="display:block">${md(p.d)} 到期・${esc(srcName(p.r.payWith))}</span></span><span class="amt num">${fmt(p.r.amount)}</span></label>`).join('')}</div>
+  <button class="btn block">標記為已付</button></form>`)}
 function stmtSheet(id){const c=card(id);if(!c)return;const p=pendingStmts().find(x=>x.c.id===id);const cl=p?p.close:(c.stmt?c.stmt.closeDate:todayStr());openSheet(`<h3>${esc(c.name)}・輸入帳單</h3><form data-form="stmt"><input type="hidden" name="id" value="${c.id}">
   <div class="grid2">${fDate('結帳日','close',cl)}${fMoney('帳單應繳總額','amount',p?p.est:'')}</div>
   ${fMoney('已繳金額（App 裡沒記錄的部分）','paid',0)}
@@ -734,7 +780,7 @@ const FORMS={
   rec(fd){const id=fd.get('id');const old=id&&DB.recurring.find(r=>r.id===id);const amt=r2(num(fd.get('amount')));if(!(amt>0))return toast('請輸入金額');
     const r={...(old||{}),id:id||uid(),kind:fd.get('kind'),name:String(fd.get('name')).trim(),amount:amt,amountType:fd.get('variable')==='on'?'variable':'fixed',isSalary:fd.get('isSalary')==='on'&&fd.get('kind')==='income',freq:fd.get('freq'),month:+fd.get('month')||1,day:+fd.get('day')||1,weekday:+fd.get('weekday')||0,payWith:fd.get('payWith')||'',cat:fd.get('cat'),tags:tagsOf(fd.get('tags')),start:fd.get('start')||'',end:fd.get('end')||'',paused:fd.get('paused')==='on'};
     commit(old?'修改固定收支':'新增固定收支',()=>{if(old)DB.recurring[DB.recurring.indexOf(old)]=r;else DB.recurring.push(r);if(!DB.settings.startDate)DB.settings.startDate=todayStr()});closeSheet()},
-  occ(fd){const key=fd.get('key');const[rid,d]=key.split('|');const r=DB.recurring.find(x=>x.id===rid);const amt=r2(num(fd.get('amount')));if(!(amt>0))return toast('請輸入金額');closeSheet();commit('確認 '+r.name,()=>confirmOcc(r,d,amt,fd.get('date'),fd.get('pay')),{toast:`已確認 ${r.name} ${fmt(amt)}`})},
+  occ(fd){const key=fd.get('key');const[rid,d]=key.split('|');const r=DB.recurring.find(x=>x.id===rid);const amt=r2(num(fd.get('amount')));if(!(amt>0))return toast('請輸入金額');closeSheet();commit('確認 '+r.name,()=>confirmOcc(r,d,amt,fd.get('date'),fd.get('pay'),fd.get('base')==='on'),{toast:`已確認 ${r.name} ${fmt(amt)}`})},
   stmt(fd){const c=card(fd.get('id'));const amt=r2(num(fd.get('amount')));const close=fd.get('close');if(!close)return toast('請填結帳日');closeSheet();commit('確認帳單',()=>applyStmt(c,close,amt,num(fd.get('paid'))),{toast:`已記錄 ${c.name} 帳單 ${fmt(amt)}`})},
   payCard(fd){const c=card(fd.get('id'));const amt=r2(num(fd.get('amount')));if(!(amt>0))return toast('請輸入金額');const from=fd.get('from');closeSheet();commit('繳卡費',()=>DB.txs.push({id:uid(),kind:'card_payment',amount:amt,cur:'TWD',date:fd.get('date')||todayStr(),acct:from,to:c.id,merchant:'',cat:'',tags:[],source:'manual',confirm:'confirmed',occur:'occurred',ts:Date.now()}),{toast:`已記錄繳 ${c.name} ${fmt(amt)}`})},
   xfer(fd){const amt=r2(num(fd.get('amount')));const from=fd.get('from'),to=fd.get('to');if(!(amt>0))return toast('請輸入金額');if(from===to)return toast('請選擇不同帳戶');const fee=r2(num(fd.get('fee')));const ta=fd.get('toAmount')?r2(num(fd.get('toAmount'))):null;closeSheet();
@@ -749,7 +795,8 @@ const FORMS={
   settings(fd){commit('修改設定',()=>{const st=DB.settings;const rv=fd.get('reserve');if(String(rv).trim()!==''){st.reserve=r2(num(rv));st.reserveSet=true}st.horizon=fd.get('horizon');const u=num(fd.get('usd'));if(u>0)st.fx.USD={rate:u,date:fd.get('fxDate')||todayStr(),est:true};st.watchTags=tagsOf(fd.get('watch'));st.staleDays=num(fd.get('staleDays'))||14;st.emMonths=num(fd.get('emMonths'))||6;st.defPay=fd.get('defPay')||'';st.defCard=fd.get('defCard')||'';st.aiOn=fd.get('aiOn')==='on'});closeSheet();toast('設定已儲存')},
   apikey(fd){const k=String(fd.get('key')||'').trim();if(!k||k.startsWith('••'))return closeSheet();if(!/^sk-ant-/.test(k))return toast('金鑰應該是 sk-ant- 開頭');try{localStorage.setItem('qt:apikey',k)}catch(e){return toast('無法儲存金鑰')}S.ai=makeAI();closeSheet();render();toast('AI 功能已啟用')},
   decide(){syncDf();S.dres=analyze(S.df);S.dai='';if(!S.dres)return toast('請輸入金額');render()},
-  chat(fd){const q=String(fd.get('q')||'').trim();if(q)askChat(q)}
+  chat(fd){const q=String(fd.get('q')||'').trim();if(q)askChat(q)},
+  prepaid(fd){const keys=fd.getAll('k');if(!keys.length)return toast('沒有勾選任何項目');closeSheet();commit('標記已先付',()=>{for(const k of keys){const[rid,d]=k.split('|');const r=DB.recurring.find(x=>x.id===rid);if(r&&!DB.occ[k])confirmOcc(r,d,r.amount,todayStr(),r.payWith,true)}},{toast:`已標記 ${keys.length} 筆，不會再重複扣`})}
 };
 function syncDf(){const f=$('#dform');if(!f)return;const fd=new FormData(f);for(const k of['item','price','date','pay','n','fee','need','why'])if(fd.has(k))S.df[k]=fd.get(k);S.df.inst=fd.get('inst')==='on';S.df.feeKnown=String(fd.get('fee')||'').trim()!==''}
 
@@ -769,6 +816,7 @@ const ACT={
   occOk(d){const[rid,day]=d.key.split('|');const r=DB.recurring.find(x=>x.id===rid);if(r.amountType==='variable')return occSheet(d.key);commit('確認 '+r.name,()=>confirmOcc(r,day,r.amount),{toast:`已確認 ${r.name}`})},
   occSkip(d){const[rid,day]=d.key.split('|');closeSheet();commit('標記沒發生',()=>{DB.occ[d.key]={s:'skip'}},{toast:'已標記沒發生'})},
   occAll(){const L=pendingRec();const v=L.filter(p=>p.r.amountType==='variable');commit('批次確認',()=>{for(const p of L)if(p.r.amountType!=='variable')confirmOcc(p.r,p.d,p.r.amount)},{toast:`已確認 ${L.length-v.length} 筆${v.length?`，${v.length} 筆金額會變的請逐筆填`:''}`})},
+  prepaid(){prepaidSheet()},
   stmt(d){stmtSheet(d.id)},payCard(d){payCardSheet(d.id)},cardRecon(d){cardReconSheet(d.id)},
   xfer(){xferSheet()},xferPre(d){xferSheet({from:d.from,to:d.to,amt:d.amt})},recon(){reconSheet()},
   newHold(){holdForm()},editHold(d){holdForm(DB.holdings.find(h=>h.id===d.id))},delHold(d){closeSheet();commit('刪除持股',()=>{DB.holdings=DB.holdings.filter(h=>h.id!==d.id)})},prices(){pricesSheet()},
@@ -816,6 +864,7 @@ if(typeof document!=='undefined'&&document.getElementById('view')){
   document.addEventListener('input',e=>{if(e.target.id==='qIn'){S.qparse=parseAll(e.target.value);renderQPrev()}if(e.target.form&&e.target.form.id==='dform')syncDf()});
   document.addEventListener('toggle',e=>{const d=e.target;if(d.classList&&d.classList.contains('why')&&d.dataset.key)S.openSug[d.dataset.key]=d.open},true);
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#sheet').hidden)closeSheet()});
+  document.addEventListener('touchstart',()=>{},{passive:true});wireSheetDrag();
   addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstall=e;if(DB)render()});
   $('#importFile').addEventListener('change',e=>{const file=e.target.files[0];e.target.value='';if(!file)return;const rd=new FileReader();rd.onload=()=>{let d;try{d=JSON.parse(rd.result)}catch(err){return toast('這不是有效的備份檔')}
     if(d&&d.v===2){closeSheet();commit('匯入備份',()=>{DB=normDB(d)},{toast:'備份已匯入'})}else if(d&&d.core){closeSheet();commit('匯入舊版備份',()=>{DB=normDB(migrateV1(d))},{toast:'舊版備份已轉換匯入'})}else toast('這不是錢途的備份檔')};rd.readAsText(file)});
